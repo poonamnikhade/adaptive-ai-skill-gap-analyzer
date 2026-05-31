@@ -1,0 +1,259 @@
+{% extends "base.html" %}
+
+{% block content %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="dashboard-header" style="margin-bottom: 2.5rem;">
+    <h1 class="text-gradient" style="font-size: 2.5rem; margin-bottom: 0.5rem;">Dashboard Overview</h1>
+    <p style="color: var(--text-muted); font-size: 1.1rem;">Welcome back, {{ user.name }}! Here is your AI-driven career readiness analysis.</p>
+</div>
+
+<div class="dashboard-grid" style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem;">
+    
+    <!-- Match Score Card -->
+    <div class="glass-card" style="grid-column: span 4; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <h3 style="align-self: flex-start; margin-bottom: 1rem; width: 100%;">Current Readiness: <span class="text-gradient">{{ target_role }}</span></h3>
+        {% if analysis %}
+        <div style="position: relative; width: 150px; height: 150px;">
+            <canvas id="matchScoreChart"></canvas>
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+                <h2 style="font-size: 2rem; margin: 0; color: var(--accent);">{{ chart_data.match_score }}%</h2>
+            </div>
+        </div>
+        <p style="margin-top: 1rem; color: var(--text-muted); text-align: center;">Baseline Proficiency</p>
+        {% else %}
+        <div style="text-align: center; padding: 1rem;">
+            <i class="fa-solid fa-chart-simple" style="font-size: 3rem; color: var(--text-muted); opacity: 0.2; margin-bottom: 1rem;"></i>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">No analysis found.</p>
+            <a href="{{ url_for('analysis') }}" style="color: var(--primary); font-size: 0.85rem; text-decoration: none;">Run Analysis →</a>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Future Readiness Prediction Meter -->
+    <div class="glass-card" style="grid-column: span 8;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+            <div>
+                <h3 style="margin: 0;">Projected Career Readiness</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">AI forecast based on your recommended learning roadmap.</p>
+            </div>
+            <div style="text-align: right;">
+                <span style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">Model Mode</span>
+                <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--accent);">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span style="font-weight: 600;">Prediction Active</span>
+                </div>
+            </div>
+        </div>
+        <canvas id="readinessChart" height="100"></canvas>
+        
+        {% if analysis %}
+        <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid rgba(255,255,255,0.05);">
+            <h4 style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem;">
+                <i class="fa-solid fa-gauge-high" style="color: var(--accent); margin-right: 0.5rem;"></i> Smart Tracking & Journey Monitoring
+            </h4>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem;">
+                <div style="background: rgba(255,255,255,0.02); padding: 1rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.03);">
+                    <span style="display: block; font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.25rem;">Skills Completed</span>
+                    <span style="font-size: 1.25rem; font-weight: 700; color: var(--text-main);">{{ tracking_stats.completed }}</span>
+                </div>
+                <div style="background: rgba(255,255,255,0.02); padding: 1rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.03);">
+                    <span style="display: block; font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.25rem;">In Progress</span>
+                    <span style="font-size: 1.25rem; font-weight: 700; color: var(--primary);">{{ tracking_stats.in_progress }}</span>
+                </div>
+                <div style="background: rgba(255,255,255,0.02); padding: 1rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.03);">
+                    <span style="display: block; font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.25rem;">Remaining Gaps</span>
+                    <span style="font-size: 1.25rem; font-weight: 700; color: #ef4444;">{{ tracking_stats.remaining }}</span>
+                </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div style="background: rgba(99,102,241,0.05); padding: 1rem; border-radius: 12px; border: 1px solid rgba(99,102,241,0.1);">
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+                        <i class="fa-solid fa-bolt" style="color: var(--primary);"></i>
+                        <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Next High-Impact Skill</span>
+                    </div>
+                    <p style="color: var(--text-main); font-weight: 600; font-size: 0.95rem; margin: 0;">{{ tracking_stats.next_skill }}</p>
+                </div>
+                <div style="background: rgba(6,182,212,0.05); padding: 1rem; border-radius: 12px; border: 1px solid rgba(6,182,212,0.1);">
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+                        <i class="fa-solid fa-calendar-check" style="color: var(--accent);"></i>
+                        <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Learning Velocity</span>
+                    </div>
+                    <p style="color: var(--text-main); font-weight: 600; font-size: 0.95rem; margin: 0;">{{ tracking_stats.velocity }} Velocity</p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Skill Gap Radar -->
+    <div class="glass-card" style="grid-column: span 6;">
+        <h3 style="margin-bottom: 1rem;">Skill Gap Analysis</h3>
+        {% if analysis %}
+        <div style="height: 300px; display: flex; justify-content: center;">
+            <canvas id="skillGapRadar"></canvas>
+        </div>
+        {% else %}
+        <div style="height: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--text-muted);">
+            <i class="fa-solid fa-compass-drafting" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.2;"></i>
+            <p>Select a role and enter skills to see your radar chart.</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Recent Quiz Performance -->
+    <div class="glass-card" style="grid-column: span 6; display: flex; flex-direction: column;">
+        <h3 style="margin-bottom: 1rem;">Recent Quiz Performance</h3>
+        {% if quiz_history %}
+        <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.75rem; flex: 1;">
+            {% for entry in quiz_history[-3:] | reverse %}
+            <li style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 12px; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h4 style="color: var(--text-main); margin-bottom: 0.25rem;">{{ entry.quiz }}</h4>
+                    <p style="color: var(--text-muted); font-size: 0.85rem;">{{ entry.date }}</p>
+                </div>
+                <div style="text-align: right;">
+                    <span style="font-size: 1.5rem; font-weight: 700; color: {% if entry.score >= 80 %}var(--accent){% elif entry.score >= 50 %}var(--primary){% else %}#ef4444{% endif %};">{{ entry.score }}%</span>
+                    <p style="color: var(--text-muted); font-size: 0.8rem;">{{ entry.status }}</p>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--text-muted);">
+            <i class="fa-solid fa-clipboard-question" style="font-size: 2.5rem; margin-bottom: 1rem; opacity: 0.4;"></i>
+            <p>No quizzes taken yet.</p>
+            <a href="{{ url_for('quiz') }}" style="color: var(--primary); margin-top: 0.5rem;">Take your first quiz →</a>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- AI Insights & Reasoning Card -->
+    <div class="glass-card" style="grid-column: span 12; border: 1px solid var(--border-light); background: rgba(255,255,255,0.02);">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 1.25rem;">
+                <div style="width: 44px; height: 44px; background: rgba(99, 102, 241, 0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; color: var(--primary);">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <div>
+                    <h3 style="margin: 0; font-size: 1.15rem; font-weight: 600;">AI Forecast & Reasoning</h3>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.1rem;">Predictive insights based on industry skill learning curves.</p>
+                </div>
+            </div>
+            {% if analysis %}
+            <div style="text-align: right;">
+                <span style="display: block; font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">Final Readiness Projection</span>
+                <span style="font-weight: 600; font-size: 1.1rem; color: var(--text-main);">98% Match (Estimated)</span>
+            </div>
+            {% endif %}
+        </div>
+        
+        <div style="margin-top: 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem;">
+            {% if analysis and analysis.xai_insights %}
+            <div style="padding: 1.25rem; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.03); border-radius: 12px;">
+                <h4 style="font-size: 0.8rem; margin-bottom: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;"><i class="fa-solid fa-lightbulb" style="color: var(--primary); margin-right: 0.5rem;"></i> Predictive Logic</h4>
+                <p style="font-size: 0.9rem; line-height: 1.6; color: var(--text-main);">{{ analysis.xai_insights.reasoning[0] if analysis.xai_insights.reasoning else 'Complete an analysis to see detailed reasoning.' }}</p>
+            </div>
+            <div style="padding: 1.25rem; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.03); border-radius: 12px;">
+                <h4 style="font-size: 0.8rem; margin-bottom: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;"><i class="fa-solid fa-chart-line" style="color: var(--accent); margin-right: 0.5rem;"></i> Readiness Accelerator</h4>
+                <p style="font-size: 0.9rem; line-height: 1.6; color: var(--text-main);">The forecast predicts that mastering <strong style="color: var(--accent); font-weight: 600;">{{ analysis.xai_insights.top_features[0].name if analysis.xai_insights.top_features else 'N/A' }}</strong> will accelerate your readiness by the largest margin.</p>
+            </div>
+            {% else %}
+            <div style="grid-column: span 2; text-align: center; padding: 2rem; color: var(--text-muted);">
+                <p style="font-size: 0.9rem;">No analysis data found. <a href="{{ url_for('analysis') }}" style="color: var(--primary); font-weight: 500; text-decoration: none; border-bottom: 1px solid rgba(99,102,241,0.3);">Run a Skill Analysis</a> to generate professional insights.</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+    Chart.defaults.color = '#94a3b8';
+    Chart.defaults.font.family = "'Inter', sans-serif";
+
+    {% if analysis %}
+    const matchScore = {{ chart_data.match_score }};
+    
+    new Chart(document.getElementById('matchScoreChart').getContext('2d'), {
+        type: 'doughnut',
+        data: {
+            labels: ['Matched', 'Gap'],
+            datasets: [{ data: [matchScore, 100 - matchScore], backgroundColor: ['rgba(6, 182, 212, 0.8)', 'rgba(255, 255, 255, 0.05)'], borderWidth: 0, cutout: '80%' }]
+        },
+        options: { plugins: { legend: { display: false }, tooltip: { enabled: false } }, animation: { animateScale: true } }
+    });
+    {% endif %}
+
+    {% if analysis_history and analysis_history|length > 0 %}
+        let readinessLabels = {{ analysis_history | map(attribute='date') | list | tojson }};
+        let readinessData = {{ analysis_history | map(attribute='score') | list | tojson }};
+        let readinessReasons = {{ analysis_history | map(attribute='reason') | list | tojson }};
+    {% else %}
+        let readinessLabels = ['Start'];
+        let readinessData = [0];
+        let readinessReasons = ['No data available'];
+        document.getElementById('readinessChart').style.opacity = '0.3';
+    {% endif %}
+
+    let gradient = document.getElementById('readinessChart').getContext('2d').createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, 'rgba(99, 102, 241, 0.5)');
+    gradient.addColorStop(1, 'rgba(99, 102, 241, 0.0)');
+    new Chart(document.getElementById('readinessChart').getContext('2d'), {
+        type: 'line',
+        data: {
+            labels: readinessLabels,
+            datasets: [{ 
+                label: 'Projected Readiness', 
+                data: readinessData, 
+                borderColor: '#6366f1', 
+                backgroundColor: gradient, 
+                borderWidth: 3, 
+                tension: 0.4, 
+                fill: true, 
+                pointBackgroundColor: '#a855f7', 
+                pointBorderColor: '#fff', 
+                pointRadius: 5, 
+                pointHoverRadius: 7 
+            }]
+        },
+        options: { 
+            responsive: true, 
+            scales: { 
+                y: { beginAtZero: true, max: 100, grid: { color: 'rgba(255,255,255,0.05)' } }, 
+                x: { grid: { display: false } } 
+            }, 
+            plugins: { 
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let score = context.raw;
+                            let reason = readinessReasons[context.dataIndex];
+                            return [`Projected: ${score}%`, `Milestone: ${reason}`];
+                        }
+                    }
+                }
+            } 
+        }
+    });
+
+    {% if analysis %}
+    const skillLabels = {{ chart_data.skill_labels | tojson }};
+    const userSkills = {{ chart_data.user_skills | tojson }};
+    const requiredSkills = {{ chart_data.required_skills | tojson }};
+    
+    new Chart(document.getElementById('skillGapRadar').getContext('2d'), {
+        type: 'radar',
+        data: {
+            labels: skillLabels,
+            datasets: [
+                { label: 'Required', data: requiredSkills, backgroundColor: 'rgba(168, 85, 247, 0.2)', borderColor: '#a855f7', pointBackgroundColor: '#a855f7', borderWidth: 2 },
+                { label: 'Your Skills', data: userSkills, backgroundColor: 'rgba(6, 182, 212, 0.2)', borderColor: '#06b6d4', pointBackgroundColor: '#06b6d4', borderWidth: 2 }
+            ]
+        },
+        options: { responsive: true, maintainAspectRatio: false, scales: { r: { angleLines: { color: 'rgba(255,255,255,0.1)' }, grid: { color: 'rgba(255,255,255,0.1)' }, pointLabels: { color: '#f8fafc', font: { size: 12 } }, ticks: { display: false, min: 0, max: 100 } } }, plugins: { legend: { position: 'bottom', labels: { color: '#f8fafc' } } } }
+    });
+    {% endif %}
+</script>
+{% endblock %}

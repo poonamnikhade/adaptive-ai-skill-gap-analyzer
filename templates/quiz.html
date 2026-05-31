@@ -1,0 +1,307 @@
+{% extends "base.html" %}
+
+{% block content %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<div id="quizApp">
+
+    <!-- Quiz Start Screen -->
+    <div id="quizStart" style="text-align: center; padding: 4rem 2rem;">
+        <div class="glass-card" style="max-width: 600px; margin: 0 auto; padding: 3rem;">
+            <i class="fa-solid fa-brain"
+                style="font-size: 4rem; color: var(--primary); margin-bottom: 1.5rem; filter: drop-shadow(0 0 15px var(--primary-glow));"></i>
+            <h1 class="text-gradient" style="margin-bottom: 1rem;">{{ target_role }} Quiz</h1>
+            <p style="color: var(--text-muted); margin-bottom: 0.5rem;">{{ questions|length }} Questions • 10 Minutes • Multiple Choice</p>
+            <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 0.9rem;">Topics: {{ topics }}</p>
+            <button onclick="startQuiz()"
+                style="padding: 1rem 3rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); border: none; color: white; font-weight: 600; font-size: 1.1rem; border-radius: 30px; cursor: pointer; transition: all 0.3s; box-shadow: 0 0 20px var(--primary-glow);">
+                Start Quiz <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Quiz Active Screen -->
+    <div id="quizActive" style="display: none; max-width: 850px; margin: 0 auto;">
+
+        <!-- Header -->
+        <div class="glass-card"
+            style="margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <h2 class="text-gradient" style="margin-bottom: 0.25rem;">{{ target_role }}</h2>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Question <span id="currentQNum">1</span> of
+                    <span id="totalQs">{{ questions|length }}</span></p>
+            </div>
+            <div style="text-align: right;">
+                <div id="timerDisplay"
+                    style="font-size: 1.5rem; font-weight: 700; color: var(--accent); display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fa-regular fa-clock"></i> <span id="timerText">10:00</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question Navigator -->
+        <div class="glass-card" style="margin-bottom: 1.5rem; padding: 1rem;">
+            <div id="questionNav" style="display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;"></div>
+        </div>
+
+        <!-- Question Card -->
+        <div class="glass-card" style="padding: 2.5rem;">
+            <p id="topicBadge"
+                style="display: inline-block; background: rgba(99,102,241,0.2); color: var(--primary); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; margin-bottom: 1rem;">
+            </p>
+            <h3 id="questionText" style="font-size: 1.2rem; margin-bottom: 2rem; line-height: 1.6;"></h3>
+            <div id="optionsContainer" style="display: flex; flex-direction: column; gap: 0.75rem;"></div>
+
+            <div style="display: flex; justify-content: space-between; margin-top: 2.5rem;">
+                <button onclick="prevQuestion()" id="prevBtn" class="nav-btn"
+                    style="padding: 0.8rem 2rem; background: transparent; border: 1px solid var(--border-light); color: white; border-radius: 8px; cursor: pointer; transition: all 0.3s;">Previous</button>
+                <button onclick="nextQuestion()" id="nextBtn" class="nav-btn"
+                    style="padding: 0.8rem 2rem; background: var(--primary); border: none; color: white; border-radius: 8px; cursor: pointer; transition: all 0.3s; font-weight: 600;">Next
+                    Question</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Results Screen -->
+    <div id="quizResults" style="display: none; max-width: 850px; margin: 0 auto;">
+        <div class="glass-card" style="text-align: center; margin-bottom: 2rem; padding: 3rem;">
+            <h1 class="text-gradient" style="margin-bottom: 0.5rem;">Quiz Completed!</h1>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Here is your detailed performance analysis.</p>
+            <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                <div
+                    style="background: rgba(6,182,212,0.1); padding: 1.5rem 2.5rem; border-radius: 16px; border: 1px solid rgba(6,182,212,0.3);">
+                    <h2 id="scorePct" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 0.25rem;">0%</h2>
+                    <p style="color: var(--text-muted);">Score</p>
+                </div>
+                <div
+                    style="background: rgba(99,102,241,0.1); padding: 1.5rem 2.5rem; border-radius: 16px; border: 1px solid rgba(99,102,241,0.3);">
+                    <h2 id="correctCount" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 0.25rem;">0/{{ questions|length }}
+                    </h2>
+                    <p style="color: var(--text-muted);">Correct</p>
+                </div>
+                <div
+                    style="background: rgba(168,85,247,0.1); padding: 1.5rem 2.5rem; border-radius: 16px; border: 1px solid rgba(168,85,247,0.3);">
+                    <h2 id="timeTaken" style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 0.25rem;">0:00
+                    </h2>
+                    <p style="color: var(--text-muted);">Time Taken</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+            <div class="glass-card">
+                <h3 style="margin-bottom: 1rem;">Topic Performance</h3>
+                <canvas id="topicChart" height="200"></canvas>
+            </div>
+            <div class="glass-card">
+                <h3 style="margin-bottom: 1rem;"><i class="fa-solid fa-triangle-exclamation"
+                        style="color: #ef4444;"></i> Weak Topics</h3>
+                <div id="weakTopicsList"></div>
+            </div>
+        </div>
+
+        <div class="glass-card" style="margin-bottom: 2rem;">
+            <h3 style="margin-bottom: 1rem;">Answer Details</h3>
+            <div id="answerDetails"></div>
+        </div>
+
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <a href="{{ url_for('quiz') }}"
+                style="padding: 1rem 2.5rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; text-decoration: none; border-radius: 30px; font-weight: 600;">Retake
+                Quiz</a>
+            <a href="{{ url_for('dashboard') }}"
+                style="padding: 1rem 2.5rem; background: transparent; border: 1px solid var(--border-light); color: white; text-decoration: none; border-radius: 30px; font-weight: 600; margin-left: 1rem;">Go
+                to Dashboard</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .q-nav-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        border: 1px solid var(--border-light);
+        background: transparent;
+        color: var(--text-muted);
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.2s;
+    }
+
+    .q-nav-btn.answered {
+        background: rgba(99, 102, 241, 0.3);
+        border-color: var(--primary);
+        color: white;
+    }
+
+    .q-nav-btn.current {
+        background: var(--primary);
+        color: white;
+        box-shadow: 0 0 10px var(--primary-glow);
+    }
+
+    .quiz-option {
+        display: flex;
+        align-items: center;
+        padding: 1rem 1.25rem;
+        background: rgba(0, 0, 0, 0.2);
+        border: 1px solid var(--border-light);
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .quiz-option:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: var(--text-muted);
+    }
+
+    .quiz-option.selected {
+        border-color: var(--primary);
+        background: rgba(99, 102, 241, 0.1);
+        box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
+    }
+
+    .nav-btn:hover {
+        transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+        #quizResults>div:nth-child(2) {
+            grid-template-columns: 1fr !important;
+        }
+    }
+</style>
+
+<script>
+    const questions = {{ questions | tojson }};
+    let currentQ = 0;
+    let answers = {};
+    let timerInterval;
+    let timeLeft = 600; // 10 minutes in seconds
+    let startTime;
+    let isSubmitting = false;
+
+    function startQuiz() {
+        document.getElementById('quizStart').style.display = 'none';
+        document.getElementById('quizActive').style.display = 'block';
+        startTime = Date.now();
+        buildNav();
+        showQuestion(0);
+        startTimer();
+    }
+
+    function startTimer() {
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            const mins = Math.floor(timeLeft / 60);
+            const secs = timeLeft % 60;
+            document.getElementById('timerText').textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+            if (timeLeft <= 60) document.getElementById('timerDisplay').style.color = '#ef4444';
+            if (timeLeft <= 0) { clearInterval(timerInterval); submitQuiz(); }
+        }, 1000);
+    }
+
+    function buildNav() {
+        const nav = document.getElementById('questionNav');
+        nav.innerHTML = '';
+        questions.forEach((q, i) => {
+            const btn = document.createElement('button');
+            btn.className = 'q-nav-btn' + (i === currentQ ? ' current' : '') + (answers[q.id] !== undefined ? ' answered' : '');
+            btn.textContent = i + 1;
+            btn.onclick = () => showQuestion(i);
+            nav.appendChild(btn);
+        });
+    }
+
+    function showQuestion(index) {
+        currentQ = index;
+        const q = questions[index];
+        document.getElementById('currentQNum').textContent = index + 1;
+        document.getElementById('topicBadge').textContent = q.topic;
+        document.getElementById('questionText').textContent = q.question;
+        document.getElementById('prevBtn').style.visibility = index === 0 ? 'hidden' : 'visible';
+        document.getElementById('nextBtn').textContent = index === questions.length - 1 ? 'Submit Quiz' : 'Next Question';
+
+        const container = document.getElementById('optionsContainer');
+        container.innerHTML = '';
+        q.options.forEach((opt, i) => {
+            const div = document.createElement('div');
+            div.className = 'quiz-option' + (answers[q.id] === i ? ' selected' : '');
+            div.innerHTML = `<span style="margin-right:1rem; font-weight:600; color:var(--primary);">${String.fromCharCode(65 + i)})</span> <span>${opt}</span>`;
+            div.onclick = () => selectOption(q.id, i);
+            container.appendChild(div);
+        });
+        buildNav();
+    }
+
+    function selectOption(qid, optIndex) {
+        if (isSubmitting) return;
+        answers[qid] = optIndex;
+        showQuestion(currentQ);
+    }
+
+    function prevQuestion() { if (currentQ > 0) showQuestion(currentQ - 1); }
+
+    function nextQuestion() {
+        if (currentQ < questions.length - 1) showQuestion(currentQ + 1);
+        else submitQuiz();
+    }
+
+    function submitQuiz() {
+        if (isSubmitting) return;
+        isSubmitting = true;
+        clearInterval(timerInterval);
+        const elapsed = Math.floor((Date.now() - startTime) / 1000);
+
+        fetch('/submit_quiz', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ answers: answers, time_taken: elapsed })
+        })
+            .then(r => r.json())
+            .then(result => {
+                document.getElementById('quizActive').style.display = 'none';
+                document.getElementById('quizResults').style.display = 'block';
+
+                document.getElementById('scorePct').textContent = result.percentage + '%';
+                document.getElementById('correctCount').textContent = result.score + '/' + result.total;
+                const m = Math.floor(elapsed / 60), s = elapsed % 60;
+                document.getElementById('timeTaken').textContent = m + ':' + s.toString().padStart(2, '0');
+
+                // Topic chart
+                const topics = Object.keys(result.topic_scores);
+                const topicData = topics.map(t => Math.round((result.topic_scores[t].correct / result.topic_scores[t].total) * 100));
+                new Chart(document.getElementById('topicChart').getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: topics,
+                        datasets: [{ label: 'Score %', data: topicData, backgroundColor: topicData.map(v => v >= 50 ? 'rgba(6,182,212,0.6)' : 'rgba(239,68,68,0.6)'), borderRadius: 8 }]
+                    },
+                    options: { responsive: true, scales: { y: { beginAtZero: true, max: 100, grid: { color: 'rgba(255,255,255,0.05)' } }, x: { grid: { display: false } } }, plugins: { legend: { display: false } } }
+                });
+
+                // Weak topics
+                const weakDiv = document.getElementById('weakTopicsList');
+                if (result.weak_topics.length > 0) {
+                    weakDiv.innerHTML = result.weak_topics.map(t => `<div style="background:rgba(239,68,68,0.1); border-left:3px solid #ef4444; padding:1rem; border-radius:0 8px 8px 0; margin-bottom:0.75rem;"><strong>${t}</strong><p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.25rem;">Needs more practice — consider adding to your roadmap.</p></div>`).join('');
+                } else {
+                    weakDiv.innerHTML = '<p style="color:var(--accent);text-align:center;padding:2rem;"><i class="fa-solid fa-check-circle" style="font-size:2rem;margin-bottom:0.5rem;display:block;"></i>Great job! No weak topics detected.</p>';
+                }
+
+                // Answer details
+                const detailsDiv = document.getElementById('answerDetails');
+                detailsDiv.innerHTML = result.details.map((d, i) => `
+                <div style="padding:1rem;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;gap:1rem;align-items:flex-start;">
+                    <span style="width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;flex-shrink:0;${d.is_correct ? 'background:rgba(6,182,212,0.2);color:var(--accent);' : 'background:rgba(239,68,68,0.2);color:#ef4444;'}">${d.is_correct ? '✓' : '✗'}</span>
+                    <div style="flex:1;">
+                        <p style="margin-bottom:0.3rem;font-size:0.95rem;">${d.question}</p>
+                        <p style="font-size:0.85rem;color:${d.is_correct ? 'var(--accent)' : '#ef4444'};">Your answer: ${d.your_answer}</p>
+                        ${!d.is_correct ? `<p style="font-size:0.85rem;color:var(--accent);">Correct: ${d.correct_answer}</p>` : ''}
+                    </div>
+                </div>
+            `).join('');
+            });
+    }
+</script>
+{% endblock %}

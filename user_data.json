@@ -1,0 +1,947 @@
+{
+    "07b2f28c-ca9c-489b-add1-328ecdc9f8a2": {
+        "target_role": "Not Selected",
+        "entered_skills": "",
+        "last_analysis": null,
+        "past_analyses": [],
+        "quiz_history": [],
+        "analysis_history": [],
+        "career_tips": [],
+        "completed_skills": {}
+    },
+    "test@example.com": {
+        "target_role": "Data Scientist",
+        "entered_skills": "python, sql",
+        "last_analysis": {
+            "status": "success",
+            "recommendation": "Master Pandas",
+            "match_score": 33,
+            "xai_insights": {
+                "top_features": [
+                    {
+                        "name": "Data Visualization",
+                        "importance": 12
+                    },
+                    {
+                        "name": "Statistics",
+                        "importance": 12
+                    },
+                    {
+                        "name": "Deep Learning",
+                        "importance": 12
+                    },
+                    {
+                        "name": "Pandas",
+                        "importance": 24
+                    },
+                    {
+                        "name": "NumPy",
+                        "importance": 24
+                    },
+                    {
+                        "name": "Machine Learning",
+                        "importance": 24
+                    }
+                ],
+                "reasoning": [
+                    "STRENGTH ANALYSIS: Your proficiency in Python, SQL provides a high-weight foundation (Importance=5/10). These vectors reduce profile entropy significantly.",
+                    "GAP ANALYSIS: Identified 6 secondary gaps. While not immediately blocking, resolving these will optimize your overall proficiency coefficient.",
+                    "DOMAIN CONTEXT: Mathematical modeling and data wrangling are the primary objective functions. Missing core statistical nodes disrupts the entire predictive pipeline.",
+                    "PREDICTIVE OUTCOME: Match Coefficient = 33%. Trajectory: Divergent. Initial skill alignment is low. Focused remediation on high-impact skills is statistically the fastest path to readiness."
+                ],
+                "impact": "High",
+                "raw_logic": "Entropy Reduction Matrix | Target: Data Scientist | Weighting: Role-Impact-V2"
+            },
+            "target_role": "Data Scientist",
+            "user_skills_data": {
+                "Python": 80,
+                "Pandas": 20,
+                "NumPy": 20,
+                "Machine Learning": 20,
+                "SQL": 70,
+                "Data Visualization": 20,
+                "Statistics": 20,
+                "Deep Learning": 20
+            },
+            "skill_names": [
+                "Python",
+                "Pandas",
+                "NumPy",
+                "Machine Learning",
+                "SQL",
+                "Data Visualization",
+                "Statistics",
+                "Deep Learning"
+            ],
+            "detected_skills": [
+                "Python",
+                "SQL"
+            ],
+            "missing_skills": [
+                "Pandas",
+                "NumPy",
+                "Machine Learning",
+                "Data Visualization",
+                "Statistics",
+                "Deep Learning"
+            ],
+            "gap_score": 67
+        },
+        "past_analyses": [
+            {
+                "date": "May 15, 2026 - 15:16",
+                "role": "Data Scientist",
+                "score": 33,
+                "skills": [
+                    "Python",
+                    "SQL"
+                ]
+            },
+            {
+                "date": "May 15, 2026 - 13:52",
+                "role": "Software Developer",
+                "score": 32,
+                "skills": [
+                    "Java",
+                    "OOP"
+                ]
+            },
+            {
+                "date": "May 15, 2026 - 13:41",
+                "role": "Cyber Security",
+                "score": 27,
+                "skills": [
+                    "Ethical Hacking"
+                ]
+            },
+            {
+                "date": "May 15, 2026 - 13:40",
+                "role": "Cloud Engineer",
+                "score": 32,
+                "skills": [
+                    "AWS",
+                    "Docker"
+                ]
+            },
+            {
+                "date": "May 15, 2026 - 13:40",
+                "role": "Web Developer",
+                "score": 20,
+                "skills": []
+            },
+            {
+                "date": "May 15, 2026 - 13:39",
+                "role": "Data Scientist",
+                "score": 33,
+                "skills": [
+                    "Python",
+                    "SQL"
+                ]
+            }
+        ],
+        "quiz_history": [
+            {
+                "date": "May 15, 2026",
+                "quiz": "Software Developer Skill Test",
+                "score": 100,
+                "status": "Mastered",
+                "topics": {
+                    "DSA": {
+                        "correct": 1,
+                        "total": 1
+                    },
+                    "OOP": {
+                        "correct": 1,
+                        "total": 1
+                    },
+                    "Java": {
+                        "correct": 1,
+                        "total": 1
+                    },
+                    "System Design": {
+                        "correct": 1,
+                        "total": 1
+                    },
+                    "Git": {
+                        "correct": 1,
+                        "total": 1
+                    }
+                }
+            }
+        ],
+        "analysis_history": [
+            {
+                "date": "Present",
+                "score": 33,
+                "reason": "Current technical baseline."
+            },
+            {
+                "date": "Week 1",
+                "score": 43,
+                "reason": "Acquiring Pandas rounds out your supporting technical toolkit."
+            },
+            {
+                "date": "Week 2",
+                "score": 54,
+                "reason": "Acquiring NumPy rounds out your supporting technical toolkit."
+            },
+            {
+                "date": "Week 6",
+                "score": 65,
+                "reason": "Acquiring Machine Learning rounds out your supporting technical toolkit."
+            },
+            {
+                "date": "Month 2",
+                "score": 76,
+                "reason": "Acquiring Data Visualization rounds out your supporting technical toolkit."
+            },
+            {
+                "date": "Month 2, Wk 3",
+                "score": 87,
+                "reason": "Acquiring Statistics rounds out your supporting technical toolkit."
+            },
+            {
+                "date": "Month 4",
+                "score": 97,
+                "reason": "Acquiring Deep Learning rounds out your supporting technical toolkit."
+            }
+        ],
+        "career_tips": [
+            "Prioritize Machine Learning; it is the most critical gap in your current profile.",
+            "Focus on Machine Learning and Statistics to unlock predictive analysis capabilities.",
+            "Pandas and SQL are the foundation for any professional data engineering pipeline."
+        ],
+        "completed_skills": {},
+        "notifications": [
+            {
+                "id": "c2554738-fc3c-4b10-a0b6-e90ee7748686",
+                "text": "Skill Analysis Complete. Your Data Scientist match score is 33%.",
+                "type": "readiness_update",
+                "read": false,
+                "timestamp": "15:16, May 15"
+            },
+            {
+                "id": "fad0f3bd-2153-42ec-94ce-dd90aff8f035",
+                "text": "High Impact Alert: Learning Machine Learning can boost your readiness by ~15%!",
+                "type": "ai_recommendation",
+                "read": false,
+                "timestamp": "15:16, May 15"
+            },
+            {
+                "id": "ecd7db72-4360-45c3-ad24-d5cccb710c28",
+                "text": "Achievement: Scored 100% in Software Developer Skill Test!",
+                "type": "quiz_alert",
+                "read": false,
+                "timestamp": "14:03, May 15"
+            },
+            {
+                "id": "09071d69-72bf-416c-bdb4-48b04f8b0f23",
+                "text": "Skill Analysis Complete. Your Software Developer match score is 32%.",
+                "type": "readiness_update",
+                "read": false,
+                "timestamp": "13:52, May 15"
+            },
+            {
+                "id": "b5905950-c6ab-41c7-a87e-c16f4aee78bf",
+                "text": "High Impact Alert: Learning DSA can boost your readiness by ~15%!",
+                "type": "ai_recommendation",
+                "read": false,
+                "timestamp": "13:52, May 15"
+            },
+            {
+                "id": "6679f84d-310f-4285-8e6c-3f35fd6c47b0",
+                "text": "Skill Analysis Complete. Your Cyber Security match score is 27%.",
+                "type": "readiness_update",
+                "timestamp": "13:41, May 15",
+                "read": false
+            },
+            {
+                "id": "869d93ed-d9cb-40a6-861c-0e0b4e4d11c0",
+                "text": "High Impact Alert: Learning Threat Analysis can boost your readiness by ~15%!",
+                "type": "ai_recommendation",
+                "timestamp": "13:41, May 15",
+                "read": false
+            },
+            {
+                "id": "4fa1bd35-8333-4631-9368-78a763d49854",
+                "text": "Skill Analysis Complete. Your Cloud Engineer match score is 32%.",
+                "type": "readiness_update",
+                "timestamp": "13:40, May 15",
+                "read": false
+            },
+            {
+                "id": "9bc4f691-f15d-487f-8437-1c8e32cc8253",
+                "text": "High Impact Alert: Learning Kubernetes can boost your readiness by ~15%!",
+                "type": "ai_recommendation",
+                "timestamp": "13:40, May 15",
+                "read": false
+            },
+            {
+                "id": "288f9053-ea23-41ef-b2b6-5a3bac959618",
+                "text": "Skill Analysis Complete. Your Web Developer match score is 20%.",
+                "type": "readiness_update",
+                "timestamp": "13:40, May 15",
+                "read": false
+            },
+            {
+                "id": "8690227a-53f2-4a59-884f-d65ee691fc2e",
+                "text": "High Impact Alert: Learning React can boost your readiness by ~15%!",
+                "type": "ai_recommendation",
+                "timestamp": "13:40, May 15",
+                "read": false
+            },
+            {
+                "id": "1da93b3e-9676-44fa-9e52-fcea4bfcc048",
+                "text": "Skill Analysis Complete. Your Data Scientist match score is 33%.",
+                "type": "readiness_update",
+                "timestamp": "13:39, May 15",
+                "read": false
+            },
+            {
+                "id": "78cd6350-dd05-4931-a74a-21e1e4d1ba67",
+                "text": "High Impact Alert: Learning Machine Learning can boost your readiness by ~15%!",
+                "type": "ai_recommendation",
+                "timestamp": "13:39, May 15",
+                "read": false
+            },
+            {
+                "id": "093160d0-a332-4e36-9400-d4c90f85141d",
+                "text": "AI Notification System activated. We'll keep you updated on your career progress!",
+                "type": "ai_recommendation",
+                "timestamp": "13:28, May 15",
+                "read": true
+            }
+        ],
+        "stats": {
+            "streak": 1,
+            "last_activity": "2026-05-15",
+            "roadmap_completion": 0,
+            "quiz_accuracy": 0
+        }
+    },
+    "poonam@gmail.com": {
+        "target_role": "Cloud Engineer",
+        "entered_skills": "kubernetes, docker, linux, terraform, ci/cd",
+        "last_analysis": {
+            "status": "success",
+            "recommendation": "Master AWS",
+            "match_score": 51,
+            "xai_insights": {
+                "top_features": [
+                    {
+                        "name": "AWS",
+                        "importance": 10
+                    },
+                    {
+                        "name": "Networking",
+                        "importance": 10
+                    },
+                    {
+                        "name": "DevOps",
+                        "importance": 12
+                    }
+                ],
+                "reasoning": [
+                    "Strengths Detected: Your proficiency in Docker, Kubernetes, Linux, Terraform, CI/CD provides a solid foundation. These are key technical pillars for a Cloud Engineer.",
+                    "Critical Gaps: We identified gaps in AWS, Networking, DevOps. These are high-demand skills that recruiters specifically look for in this role.",
+                    "Role Context: Cloud infrastructure is now managed via code. Proficiency in Terraform, Docker, and Kubernetes is required to deploy and scale automated, resilient systems in production.",
+                    "Readiness: Your current match score is 51%. Focusing on the identified missing skills will provide the fastest growth in your career readiness.",
+                    "Priority Focus: We recommend focusing on AWS first. Mastering this will unlock your ability to learn the remaining topics more effectively."
+                ],
+                "impact": "High",
+                "raw_logic": "Inverted Gap Severity Matrix | Target: Cloud Engineer | Model: Readiness-Focus-V1"
+            },
+            "target_role": "Cloud Engineer",
+            "user_skills_data": {
+                "AWS": 20,
+                "Docker": 70,
+                "Kubernetes": 70,
+                "Linux": 70,
+                "Terraform": 70,
+                "CI/CD": 70,
+                "Networking": 20,
+                "DevOps": 20
+            },
+            "skill_names": [
+                "AWS",
+                "Docker",
+                "Kubernetes",
+                "Linux",
+                "Terraform",
+                "CI/CD",
+                "Networking",
+                "DevOps"
+            ],
+            "detected_skills": [
+                "Docker",
+                "Kubernetes",
+                "Linux",
+                "Terraform",
+                "CI/CD"
+            ],
+            "missing_skills": [
+                "AWS",
+                "Networking",
+                "DevOps"
+            ],
+            "gap_score": 49
+        },
+        "past_analyses": [
+            {
+                "date": "May 15, 2026 - 13:35",
+                "role": "Cloud Engineer",
+                "score": 51,
+                "skills": [
+                    "Docker",
+                    "Kubernetes",
+                    "Linux",
+                    "Terraform",
+                    "CI/CD"
+                ]
+            },
+            {
+                "date": "May 15, 2026 - 13:34",
+                "role": "Cloud Engineer",
+                "score": 32,
+                "skills": [
+                    "Docker",
+                    "Kubernetes",
+                    "Linux"
+                ]
+            },
+            {
+                "date": "May 15, 2026 - 13:34",
+                "role": "Cloud Engineer",
+                "score": 32,
+                "skills": [
+                    "Docker",
+                    "Kubernetes"
+                ]
+            },
+            {
+                "date": "May 15, 2026 - 13:19",
+                "role": "Software Developer",
+                "score": 33,
+                "skills": [
+                    "Java",
+                    "Python"
+                ]
+            },
+            {
+                "date": "May 15, 2026 - 13:14",
+                "role": "Software Developer",
+                "score": 33,
+                "skills": [
+                    "Java",
+                    "Python"
+                ]
+            },
+            {
+                "date": "May 15, 2026 - 13:14",
+                "role": "Software Developer",
+                "score": 33,
+                "skills": [
+                    "Java",
+                    "Python"
+                ]
+            },
+            {
+                "date": "May 15, 2026 - 13:12",
+                "role": "Software Developer",
+                "score": 33,
+                "skills": [
+                    "Java",
+                    "Python"
+                ]
+            },
+            {
+                "date": "May 15, 2026 - 13:11",
+                "role": "Software Developer",
+                "score": 33,
+                "skills": [
+                    "Java",
+                    "Python"
+                ]
+            },
+            {
+                "date": "May 15, 2026 - 13:08",
+                "role": "Cloud Engineer",
+                "score": 32,
+                "skills": [
+                    "AWS",
+                    "Kubernetes"
+                ]
+            },
+            {
+                "date": "May 15, 2026 - 13:07",
+                "role": "AI Engineer",
+                "score": 33,
+                "skills": [
+                    "Python",
+                    "TensorFlow"
+                ]
+            }
+        ],
+        "quiz_history": [],
+        "analysis_history": [
+            {
+                "date": "Present",
+                "score": 51,
+                "reason": "Current technical baseline."
+            },
+            {
+                "date": "Week 4",
+                "score": 69,
+                "reason": "Mastering DevOps is a high-impact milestone for Cloud Engineer roles."
+            },
+            {
+                "date": "Month 1, Wk 3",
+                "score": 83,
+                "reason": "Learning AWS creates a significant readiness spike."
+            },
+            {
+                "date": "Month 2, Wk 2",
+                "score": 98,
+                "reason": "Learning Networking creates a significant readiness spike."
+            }
+        ],
+        "career_tips": [
+            "Prioritize DevOps; it is the most critical gap in your current profile.",
+            "Kubernetes and DevOps are the highest-impact skills for cloud deployment readiness.",
+            "Learning Terraform will significantly improve infrastructure automation capability."
+        ],
+        "completed_skills": {
+            "Software Developer": [
+                "OOP",
+                "DBMS",
+                "Git"
+            ],
+            "Cloud Engineer": [
+                "Linux"
+            ]
+        },
+        "notifications": [],
+        "stats": {
+            "streak": 1,
+            "last_activity": "2026-05-15",
+            "roadmap_completion": 0,
+            "quiz_accuracy": 0
+        }
+    },
+    "riya@gmail.com": {
+        "target_role": "Software Developer",
+        "entered_skills": "java",
+        "last_analysis": {
+            "status": "success",
+            "recommendation": "Master Python",
+            "match_score": 26,
+            "xai_insights": {
+                "top_features": [
+                    {
+                        "name": "Python",
+                        "importance": 12
+                    },
+                    {
+                        "name": "DSA",
+                        "importance": 12
+                    },
+                    {
+                        "name": "OOP",
+                        "importance": 12
+                    },
+                    {
+                        "name": "DBMS",
+                        "importance": 12
+                    },
+                    {
+                        "name": "Git",
+                        "importance": 12
+                    },
+                    {
+                        "name": "Problem Solving",
+                        "importance": 12
+                    },
+                    {
+                        "name": "System Design",
+                        "importance": 24
+                    }
+                ],
+                "reasoning": [
+                    "STRENGTH ANALYSIS: Your proficiency in Java provides a high-weight foundation (Importance=5/10). These vectors reduce profile entropy significantly.",
+                    "GAP ANALYSIS: Identified 7 secondary gaps. While not immediately blocking, resolving these will optimize your overall proficiency coefficient.",
+                    "DOMAIN CONTEXT: Algorithmic efficiency (DSA) and system scalability are the highest weighted features in our technical evaluation model.",
+                    "PREDICTIVE OUTCOME: Match Coefficient = 26%. Trajectory: Divergent. Initial skill alignment is low. Focused remediation on high-impact skills is statistically the fastest path to readiness."
+                ],
+                "impact": "High",
+                "raw_logic": "Entropy Reduction Matrix | Target: Software Developer | Weighting: Role-Impact-V2"
+            },
+            "target_role": "Software Developer",
+            "user_skills_data": {
+                "Java": 70,
+                "Python": 20,
+                "DSA": 20,
+                "OOP": 20,
+                "DBMS": 20,
+                "Git": 20,
+                "Problem Solving": 20,
+                "System Design": 20
+            },
+            "skill_names": [
+                "Java",
+                "Python",
+                "DSA",
+                "OOP",
+                "DBMS",
+                "Git",
+                "Problem Solving",
+                "System Design"
+            ],
+            "detected_skills": [
+                "Java"
+            ],
+            "missing_skills": [
+                "Python",
+                "DSA",
+                "OOP",
+                "DBMS",
+                "Git",
+                "Problem Solving",
+                "System Design"
+            ],
+            "gap_score": 74
+        },
+        "past_analyses": [
+            {
+                "date": "May 26, 2026 - 20:27",
+                "role": "Software Developer",
+                "score": 26,
+                "skills": [
+                    "Java"
+                ]
+            }
+        ],
+        "quiz_history": [
+            {
+                "date": "May 26, 2026",
+                "quiz": "Software Developer Skill Test",
+                "score": 0,
+                "status": "Needs Work",
+                "topics": {
+                    "DSA": {
+                        "correct": 0,
+                        "total": 1
+                    },
+                    "OOP": {
+                        "correct": 0,
+                        "total": 1
+                    },
+                    "Java": {
+                        "correct": 0,
+                        "total": 1
+                    },
+                    "System Design": {
+                        "correct": 0,
+                        "total": 1
+                    },
+                    "Git": {
+                        "correct": 0,
+                        "total": 1
+                    }
+                }
+            },
+            {
+                "date": "May 26, 2026",
+                "quiz": "Software Developer Skill Test",
+                "score": 40,
+                "status": "Needs Work",
+                "topics": {
+                    "DSA": {
+                        "correct": 1,
+                        "total": 1
+                    },
+                    "OOP": {
+                        "correct": 1,
+                        "total": 1
+                    },
+                    "Java": {
+                        "correct": 0,
+                        "total": 1
+                    },
+                    "System Design": {
+                        "correct": 0,
+                        "total": 1
+                    },
+                    "Git": {
+                        "correct": 0,
+                        "total": 1
+                    }
+                }
+            }
+        ],
+        "analysis_history": [
+            {
+                "date": "Present",
+                "score": 26,
+                "reason": "Current technical baseline."
+            },
+            {
+                "date": "Week 2",
+                "score": 36,
+                "reason": "Acquiring Python rounds out your supporting technical toolkit."
+            },
+            {
+                "date": "Month 1, Wk 3",
+                "score": 46,
+                "reason": "Acquiring DSA rounds out your supporting technical toolkit."
+            },
+            {
+                "date": "Month 2, Wk 2",
+                "score": 56,
+                "reason": "Acquiring OOP rounds out your supporting technical toolkit."
+            },
+            {
+                "date": "Month 3, Wk 1",
+                "score": 67,
+                "reason": "Acquiring DBMS rounds out your supporting technical toolkit."
+            },
+            {
+                "date": "Month 3, Wk 2",
+                "score": 77,
+                "reason": "Acquiring Git rounds out your supporting technical toolkit."
+            },
+            {
+                "date": "Month 4, Wk 3",
+                "score": 87,
+                "reason": "Acquiring Problem Solving rounds out your supporting technical toolkit."
+            },
+            {
+                "date": "Month 6, Wk 1",
+                "score": 97,
+                "reason": "Acquiring System Design rounds out your supporting technical toolkit."
+            }
+        ],
+        "career_tips": [
+            "Prioritize DSA; it is the most critical gap in your current profile.",
+            "DSA and Problem Solving are the most critical features for passing technical interviews.",
+            "System Design and OOP mastery differentiate senior engineers from juniors."
+        ],
+        "completed_skills": {},
+        "notifications": [
+            {
+                "id": "c3fc042f-037f-4126-997f-eebdd98be180",
+                "text": "Skill Analysis Complete. Your Software Developer match score is 26%.",
+                "type": "readiness_update",
+                "read": false,
+                "timestamp": "20:27, May 26"
+            },
+            {
+                "id": "59a04e3f-69a9-443f-bc79-0c92909f8bc4",
+                "text": "High Impact Alert: Learning DSA can boost your readiness by ~15%!",
+                "type": "ai_recommendation",
+                "read": false,
+                "timestamp": "20:27, May 26"
+            },
+            {
+                "id": "7760494c-096f-4406-b93b-d68d91ea80cd",
+                "text": "Progress has been reset. Start your journey again!",
+                "type": "ai_recommendation",
+                "read": false,
+                "timestamp": "20:27, May 26"
+            }
+        ],
+        "stats": {
+            "streak": 1,
+            "last_activity": "2026-05-26",
+            "roadmap_completion": 0,
+            "quiz_accuracy": 0
+        }
+    },
+    "85eb7ee9-5d9e-4c07-a0c6-333faa91f53f": {
+        "target_role": "Not Selected",
+        "entered_skills": "",
+        "last_analysis": null,
+        "past_analyses": [],
+        "quiz_history": [],
+        "analysis_history": [],
+        "career_tips": [],
+        "completed_skills": {},
+        "notifications": [
+            {
+                "id": "4b6aa35c-3922-4b2f-be9e-0cd7bc900d31",
+                "text": "Welcome to Adaptive AI! Start by selecting a role and analyzing your skills.",
+                "type": "ai_recommendation",
+                "read": false,
+                "timestamp": "20:11, May 15"
+            }
+        ],
+        "stats": {
+            "streak": 1,
+            "last_activity": "2026-05-15",
+            "roadmap_completion": 0,
+            "quiz_accuracy": 0
+        }
+    },
+    "f40404db-6cde-4ae2-b7f5-520f74e0329b": {
+        "target_role": "AI Engineer",
+        "entered_skills": "python, tensorflow",
+        "last_analysis": {
+            "status": "success",
+            "recommendation": "Master PyTorch",
+            "match_score": 33,
+            "xai_insights": {
+                "top_features": [
+                    {
+                        "name": "Deep Learning",
+                        "importance": 12
+                    },
+                    {
+                        "name": "Neural Networks",
+                        "importance": 12
+                    },
+                    {
+                        "name": "LLMs",
+                        "importance": 12
+                    },
+                    {
+                        "name": "Computer Vision",
+                        "importance": 12
+                    },
+                    {
+                        "name": "PyTorch",
+                        "importance": 24
+                    },
+                    {
+                        "name": "NLP",
+                        "importance": 24
+                    }
+                ],
+                "reasoning": [
+                    "STRENGTH ANALYSIS: Your proficiency in Python, TensorFlow provides a high-weight foundation (Importance=5/10). These vectors reduce profile entropy significantly.",
+                    "GAP ANALYSIS: Identified 6 secondary gaps. While not immediately blocking, resolving these will optimize your overall proficiency coefficient.",
+                    "DOMAIN CONTEXT: Focus is on neural architecture and deep learning optimization. Current trends prioritize LLM and CV integration over legacy ML models.",
+                    "PREDICTIVE OUTCOME: Match Coefficient = 33%. Trajectory: Divergent. Initial skill alignment is low. Focused remediation on high-impact skills is statistically the fastest path to readiness."
+                ],
+                "impact": "High",
+                "raw_logic": "Entropy Reduction Matrix | Target: AI Engineer | Weighting: Role-Impact-V2"
+            },
+            "target_role": "AI Engineer",
+            "user_skills_data": {
+                "Python": 80,
+                "TensorFlow": 70,
+                "PyTorch": 20,
+                "Deep Learning": 20,
+                "NLP": 20,
+                "Neural Networks": 20,
+                "LLMs": 20,
+                "Computer Vision": 20
+            },
+            "skill_names": [
+                "Python",
+                "TensorFlow",
+                "PyTorch",
+                "Deep Learning",
+                "NLP",
+                "Neural Networks",
+                "LLMs",
+                "Computer Vision"
+            ],
+            "detected_skills": [
+                "Python",
+                "TensorFlow"
+            ],
+            "missing_skills": [
+                "PyTorch",
+                "Deep Learning",
+                "NLP",
+                "Neural Networks",
+                "LLMs",
+                "Computer Vision"
+            ],
+            "gap_score": 67
+        },
+        "past_analyses": [
+            {
+                "date": "May 27, 2026 - 11:51",
+                "role": "AI Engineer",
+                "score": 33,
+                "skills": [
+                    "Python",
+                    "TensorFlow"
+                ]
+            }
+        ],
+        "quiz_history": [],
+        "analysis_history": [
+            {
+                "date": "Present",
+                "score": 33,
+                "reason": "Current technical baseline."
+            },
+            {
+                "date": "Week 3",
+                "score": 43,
+                "reason": "Acquiring PyTorch rounds out your supporting technical toolkit."
+            },
+            {
+                "date": "Month 2",
+                "score": 54,
+                "reason": "Acquiring Deep Learning rounds out your supporting technical toolkit."
+            },
+            {
+                "date": "Month 3",
+                "score": 65,
+                "reason": "Acquiring NLP rounds out your supporting technical toolkit."
+            },
+            {
+                "date": "Month 4",
+                "score": 76,
+                "reason": "Acquiring Neural Networks rounds out your supporting technical toolkit."
+            },
+            {
+                "date": "Month 5, Wk 1",
+                "score": 87,
+                "reason": "Acquiring LLMs rounds out your supporting technical toolkit."
+            },
+            {
+                "date": "Month 6, Wk 1",
+                "score": 97,
+                "reason": "Acquiring Computer Vision rounds out your supporting technical toolkit."
+            }
+        ],
+        "career_tips": [
+            "Prioritize Deep Learning; it is the most critical gap in your current profile.",
+            "Mastering Deep Learning and LLMs will create the biggest jump in your AI readiness.",
+            "Your AI career growth accelerates after mastering PyTorch or TensorFlow."
+        ],
+        "completed_skills": {},
+        "notifications": [
+            {
+                "id": "cb2a04ca-d874-4ef5-aef6-5cb31bf4add0",
+                "text": "Skill Analysis Complete. Your AI Engineer match score is 33%.",
+                "type": "readiness_update",
+                "read": false,
+                "timestamp": "11:51, May 27"
+            },
+            {
+                "id": "4841d8c9-27ca-4aff-b0d3-53046e9fb240",
+                "text": "High Impact Alert: Learning Deep Learning can boost your readiness by ~15%!",
+                "type": "ai_recommendation",
+                "read": false,
+                "timestamp": "11:51, May 27"
+            },
+            {
+                "id": "03cc2445-4d14-42bf-ab5d-ced996040748",
+                "text": "Welcome to Adaptive AI! Start by selecting a role and analyzing your skills.",
+                "type": "ai_recommendation",
+                "read": false,
+                "timestamp": "11:49, May 27"
+            }
+        ],
+        "stats": {
+            "streak": 1,
+            "last_activity": "2026-05-27",
+            "roadmap_completion": 0,
+            "quiz_accuracy": 0
+        }
+    }
+}

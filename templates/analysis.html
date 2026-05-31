@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="analysis-page">
+    <div style="text-align: center; margin-bottom: 3rem;">
+        <h1 class="text-gradient">Skill Gap Analysis & XAI</h1>
+        <p style="color: var(--text-muted);">Compare your current skills with industry demands and understand AI
+            recommendations.</p>
+    </div>
+
+    <div class="analysis-grid" style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 2rem;">
+
+        <!-- Input Section -->
+        <div class="glass-card" style="grid-column: span 5; display: flex; flex-direction: column; gap: 1.5rem;">
+            <h3><i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Analysis Configuration</h3>
+
+            <form method="POST" action="{{ url_for('analysis') }}"
+                style="display: flex; flex-direction: column; gap: 1.5rem;">
+                <div class="form-group">
+                    <label style="color: var(--text-muted); display: block; margin-bottom: 0.5rem;">Target Career
+                        Role</label>
+                    <select name="target_role" id="roleSelect" required onchange="updateSkillSuggestions()"
+                        style="width: 100%; padding: 0.8rem; background: rgba(0,0,0,0.2); border: 1px solid var(--border-light); border-radius: 8px; color: white; outline: none;">
+                        <option value="" disabled {{ 'selected' if selected_role == 'Not Selected' }} style="background: #16192b; color: #94a3b8;">Choose your
+                            target role...</option>
+                        <option value="Data Scientist" {{ 'selected' if selected_role == 'Data Scientist' }} style="background: #16192b; color: white;">Data Scientist
+                        </option>
+                        <option value="AI Engineer" {{ 'selected' if selected_role == 'AI Engineer' }} style="background: #16192b; color: white;">AI Engineer</option>
+                        <option value="Web Developer" {{ 'selected' if selected_role == 'Web Developer' }} style="background: #16192b; color: white;">Web Developer</option>
+                        <option value="Cloud Engineer" {{ 'selected' if selected_role == 'Cloud Engineer' }} style="background: #16192b; color: white;">Cloud Engineer
+                        </option>
+                        <option value="Cyber Security" {{ 'selected' if selected_role == 'Cyber Security' }} style="background: #16192b; color: white;">Cyber Security Analyst
+                        </option>
+                        <option value="Software Developer" {{ 'selected' if selected_role == 'Software Developer' }} style="background: #16192b; color: white;">Software Developer
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label style="color: var(--text-muted); display: block; margin-bottom: 0.5rem;">Your Current Skills
+                        (Comma Separated)</label>
+                    <textarea name="current_skills" id="skillsInput" rows="4"
+                        placeholder="e.g., Python, HTML, CSS, basic SQL" required
+                        style="width: 100%; padding: 0.8rem; background: rgba(0,0,0,0.2); border: 1px solid var(--border-light); border-radius: 8px; color: white; outline: none; resize: none;">{{ entered_skills }}</textarea>
+                </div>
+
+                <div id="suggestionsArea" style="display: none;">
+                    <label
+                        style="color: var(--text-muted); font-size: 0.75rem; display: block; margin-bottom: 0.5rem; text-transform: uppercase;">Quick
+                        Add Suggestions</label>
+                    <div id="skillChips" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                        <!-- Chips will be injected here -->
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary"
+                    style="padding: 0.8rem; background: var(--primary); border: none; color: white; font-weight: 600; border-radius: 8px; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 12px var(--primary-glow);">
+                    <i class="fa-solid fa-microchip"></i> Run AI Analysis
+                </button>
+            </form>
+        </div>
+
+        <!-- Missing Skills & XAI Insights -->
+        <div class="glass-card" style="grid-column: span 7;">
+            <h3 style="margin-bottom: 1.5rem;"><i class="fa-solid fa-network-wired"
+                    style="color: var(--secondary);"></i> Explainable AI (XAI) Insights</h3>
+
+            {% if result %}
+            {% if result.error %}
+            <div
+                style="background: rgba(239, 68, 68, 0.1); border-left: 4px solid #ef4444; padding: 1.5rem; border-radius: 0 8px 8px 0; margin-bottom: 1rem;">
+                <h4 style="color: #ef4444; margin-bottom: 0.5rem;">System Notice</h4>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">{{ result.error }}</p>
+            </div>
+            {% endif %}
+
+            <div class="xai-container" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                <div class="xai-card"
+                    style="background: rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.2); padding: 1.5rem; border-radius: 12px;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <div>
+                            <h4 style="color: var(--text-main); margin: 0;"><i class="fa-solid fa-wand-magic-sparkles"
+                                    style="color: var(--secondary); margin-right: 0.5rem;"></i> Recommendation: <span
+                                    class="text-gradient">{{ result.recommendation }}</span></h4>
+                            <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.25rem;">Analysis for
+                                <strong style="color: var(--accent);">{{ result.target_role }}</strong></p>
+                        </div>
+                        <span
+                            style="font-size: 0.75rem; background: rgba(34, 197, 94, 0.2); color: #22c55e; padding: 0.2rem 0.6rem; border-radius: 20px;">{{
+                            result.xai_insights.impact }} Impact</span>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 3rem;">
+                        <!-- Feature Importance -->
+                        <div>
+                            <h5
+                                style="color: var(--text-muted); font-size: 0.75rem; margin-bottom: 1.25rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">
+                                Top Critical Skill Gaps</h5>
+                            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                                {% for feature in result.xai_insights.top_features %}
+                                <div class="importance-item">
+                                    <div
+                                        style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.4rem;">
+                                        <span style="color: var(--text-muted);">{{ feature.name }}</span>
+                                        <span style="color: var(--accent); font-weight: 600;">{{ feature.importance
+                                            }}%</span>
+                                    </div>
+                                    <div
+                                        style="height: 4px; background: rgba(255,255,255,0.05); border-radius: 2px; overflow: hidden;">
+                                        <div
+                                            style="height: 100%; width: {{ feature.importance }}%; background: var(--primary); border-radius: 2px;">
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- Reasoning -->
+                        <div>
+                            <h5
+                                style="color: var(--text-muted); font-size: 0.75rem; margin-bottom: 1.25rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">
+                                Model Reasoning Path</h5>
+                            <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 1rem;">
+                                {% for point in result.xai_insights.reasoning %}
+                                <li
+                                    style="display: flex; gap: 0.75rem; font-size: 0.9rem; color: var(--text-main); line-height: 1.5;">
+                                    <i class="fa-solid fa-circle-check"
+                                        style="color: var(--secondary); margin-top: 0.2rem; font-size: 0.85rem;"></i>
+                                    <span>{{ point }}</span>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            {% else %}
+            <div style="text-align: center; padding: 3rem 0; color: var(--text-muted);">
+                <i class="fa-solid fa-robot" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;"></i>
+                <p>Enter your skills and target role to generate AI insights.</p>
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+
+<script>
+    const roleSkills = {{ role_skills | tojson }};
+
+    function updateSkillSuggestions() {
+        const role = document.getElementById('roleSelect').value;
+        const chipsContainer = document.getElementById('skillChips');
+        const area = document.getElementById('suggestionsArea');
+
+        if (role && roleSkills[role]) {
+            area.style.display = 'block';
+            chipsContainer.innerHTML = '';
+
+            roleSkills[role].forEach(skill => {
+                const chip = document.createElement('div');
+                chip.className = 'skill-chip';
+                chip.textContent = skill;
+                chip.onclick = () => addSkill(skill);
+                chipsContainer.appendChild(chip);
+            });
+        } else {
+            area.style.display = 'none';
+        }
+    }
+
+    function addSkill(skill) {
+        const input = document.getElementById('skillsInput');
+        let current = input.value.trim();
+        if (current) {
+            if (!current.toLowerCase().includes(skill.toLowerCase())) {
+                input.value = current + ', ' + skill;
+            }
+        } else {
+            input.value = skill;
+        }
+        input.focus();
+    }
+
+    // Call on load to show chips if role is already selected
+    window.onload = updateSkillSuggestions;
+</script>
+
+<style>
+    @media (max-width: 1024px) {
+        .analysis-grid>div {
+            grid-column: span 12 !important;
+        }
+    }
+
+    .btn-primary:hover {
+        filter: brightness(1.1);
+        box-shadow: 0 4px 15px var(--primary-glow) !important;
+    }
+
+    .skill-chip {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--border-light);
+        padding: 0.3rem 0.7rem;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .skill-chip:hover {
+        background: rgba(99, 102, 241, 0.2);
+        border-color: var(--primary);
+        color: white;
+        transform: translateY(-1px);
+    }
+</style>
+{% endblock %}

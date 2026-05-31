@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="max-width: 900px; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 3rem;">
+        <h1 class="text-gradient" style="font-size: 2.5rem; margin-bottom: 0.5rem;">About The Project</h1>
+        <p style="color: var(--text-muted);">AI-powered career guidance for the modern workforce.</p>
+    </div>
+
+    <!-- Overview -->
+    <div class="glass-card" style="margin-bottom: 2rem;">
+        <h3 style="margin-bottom: 1rem;"><i class="fa-solid fa-rocket" style="color: var(--primary);"></i> Project Overview</h3>
+        <p style="color: var(--text-muted); line-height: 1.8;">
+            The <strong style="color: var(--text-main);">Adaptive AI Skill Gap Analyzer</strong> is an intelligent platform designed to help students and job seekers bridge the gap between their current skills and the requirements of their target career roles. The system uses a Decision Tree-based machine learning model to compare user skills with industry-required competencies, calculate match scores, identify missing skills, and generate personalized learning roadmaps with Explainable AI (XAI) insights.
+        </p>
+    </div>
+
+    <!-- Objective -->
+    <div class="glass-card" style="margin-bottom: 2rem;">
+        <h3 style="margin-bottom: 1rem;"><i class="fa-solid fa-bullseye" style="color: var(--accent);"></i> Objectives</h3>
+        <ul style="color: var(--text-muted); line-height: 2; padding-left: 1.5rem;">
+            <li>Analyze current skills against industry-required competencies</li>
+            <li>Calculate match score and skill gap percentage</li>
+            <li>Identify missing and critical skills for target roles</li>
+            <li>Generate personalized, AI-driven learning roadmaps</li>
+            <li>Provide Explainable AI (XAI) reasoning for recommendations</li>
+            <li>Assess knowledge through interactive quizzes with performance tracking</li>
+        </ul>
+    </div>
+
+    <!-- Technologies -->
+    <div class="glass-card" style="margin-bottom: 2rem;">
+        <h3 style="margin-bottom: 1.5rem;"><i class="fa-solid fa-microchip" style="color: var(--secondary);"></i> Technologies Used</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem;">
+            <div class="tech-item" style="background: rgba(255,255,255,0.05); padding: 1.25rem; border-radius: 12px; text-align: center; transition: all 0.3s;">
+                <i class="fa-brands fa-python" style="font-size: 2rem; color: var(--primary); margin-bottom: 0.5rem; display: block;"></i>
+                <span style="font-size: 0.85rem; color: var(--text-main);">Python</span>
+            </div>
+            <div class="tech-item" style="background: rgba(255,255,255,0.05); padding: 1.25rem; border-radius: 12px; text-align: center; transition: all 0.3s;">
+                <i class="fa-solid fa-flask" style="font-size: 2rem; color: var(--accent); margin-bottom: 0.5rem; display: block;"></i>
+                <span style="font-size: 0.85rem; color: var(--text-main);">Flask</span>
+            </div>
+            <div class="tech-item" style="background: rgba(255,255,255,0.05); padding: 1.25rem; border-radius: 12px; text-align: center; transition: all 0.3s;">
+                <i class="fa-brands fa-html5" style="font-size: 2rem; color: var(--secondary); margin-bottom: 0.5rem; display: block;"></i>
+                <span style="font-size: 0.85rem; color: var(--text-main);">HTML5</span>
+            </div>
+            <div class="tech-item" style="background: rgba(255,255,255,0.05); padding: 1.25rem; border-radius: 12px; text-align: center; transition: all 0.3s;">
+                <i class="fa-brands fa-css3-alt" style="font-size: 2rem; color: var(--primary); margin-bottom: 0.5rem; display: block;"></i>
+                <span style="font-size: 0.85rem; color: var(--text-main);">CSS3</span>
+            </div>
+            <div class="tech-item" style="background: rgba(255,255,255,0.05); padding: 1.25rem; border-radius: 12px; text-align: center; transition: all 0.3s;">
+                <i class="fa-brands fa-js" style="font-size: 2rem; color: var(--accent); margin-bottom: 0.5rem; display: block;"></i>
+                <span style="font-size: 0.85rem; color: var(--text-main);">JavaScript</span>
+            </div>
+            <div class="tech-item" style="background: rgba(255,255,255,0.05); padding: 1.25rem; border-radius: 12px; text-align: center; transition: all 0.3s;">
+                <i class="fa-solid fa-table" style="font-size: 2rem; color: var(--secondary); margin-bottom: 0.5rem; display: block;"></i>
+                <span style="font-size: 0.85rem; color: var(--text-main);">Pandas</span>
+            </div>
+            <div class="tech-item" style="background: rgba(255,255,255,0.05); padding: 1.25rem; border-radius: 12px; text-align: center; transition: all 0.3s;">
+                <i class="fa-solid fa-brain" style="font-size: 2rem; color: var(--primary); margin-bottom: 0.5rem; display: block;"></i>
+                <span style="font-size: 0.85rem; color: var(--text-main);">Scikit-learn</span>
+            </div>
+            <div class="tech-item" style="background: rgba(255,255,255,0.05); padding: 1.25rem; border-radius: 12px; text-align: center; transition: all 0.3s;">
+                <i class="fa-solid fa-code-branch" style="font-size: 2rem; color: var(--accent); margin-bottom: 0.5rem; display: block;"></i>
+                <span style="font-size: 0.85rem; color: var(--text-main);">Decision Tree</span>
+            </div>
+            <div class="tech-item" style="background: rgba(255,255,255,0.05); padding: 1.25rem; border-radius: 12px; text-align: center; transition: all 0.3s;">
+                <i class="fa-solid fa-chart-bar" style="font-size: 2rem; color: var(--secondary); margin-bottom: 0.5rem; display: block;"></i>
+                <span style="font-size: 0.85rem; color: var(--text-main);">Chart.js</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Career Domains -->
+    <div class="glass-card" style="margin-bottom: 2rem;">
+        <h3 style="margin-bottom: 1rem;"><i class="fa-solid fa-briefcase" style="color: var(--primary);"></i> Supported Career Domains</h3>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+            <span style="background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.3); color: var(--primary); padding: 0.5rem 1.25rem; border-radius: 20px; font-size: 0.9rem;">Artificial Intelligence</span>
+            <span style="background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.3); color: var(--primary); padding: 0.5rem 1.25rem; border-radius: 20px; font-size: 0.9rem;">Data Science</span>
+            <span style="background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.3); color: var(--primary); padding: 0.5rem 1.25rem; border-radius: 20px; font-size: 0.9rem;">Web Development</span>
+            <span style="background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.3); color: var(--primary); padding: 0.5rem 1.25rem; border-radius: 20px; font-size: 0.9rem;">Cloud Computing</span>
+            <span style="background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.3); color: var(--primary); padding: 0.5rem 1.25rem; border-radius: 20px; font-size: 0.9rem;">Cyber Security</span>
+            <span style="background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.3); color: var(--primary); padding: 0.5rem 1.25rem; border-radius: 20px; font-size: 0.9rem;">Software Development</span>
+        </div>
+    </div>
+
+    <!-- Future Enhancements -->
+    <div class="glass-card" style="margin-bottom: 2rem;">
+        <h3 style="margin-bottom: 1rem;"><i class="fa-solid fa-lightbulb" style="color: var(--accent);"></i> Future Enhancements</h3>
+        <ul style="color: var(--text-muted); line-height: 2; padding-left: 1.5rem;">
+            <li>Real-time job market data integration via APIs</li>
+            <li>Multi-language support for global accessibility</li>
+            <li>Collaborative learning with peer skill-matching</li>
+            <li>Resume parsing and automatic skill extraction using NLP</li>
+            <li>Certification tracking and verification</li>
+        </ul>
+    </div>
+</div>
+
+<style>
+    .tech-item:hover {
+        transform: translateY(-3px);
+        background: rgba(255,255,255,0.08) !important;
+    }
+</style>
+{% endblock %}

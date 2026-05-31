@@ -1,0 +1,18 @@
+target_role,python_score,sql_score,ml_score,deep_learning_score,cloud_score,match_percentage,recommendation
+Data Scientist,85,90,80,20,40,75,Deep Learning
+Data Scientist,90,85,85,70,80,90,Ready
+Data Scientist,60,50,40,10,20,45,Python & SQL Basics
+Data Scientist,40,30,10,0,10,20,Advanced Python
+AI Engineer,80,40,70,30,50,60,Deep Learning (PyTorch)
+AI Engineer,90,60,85,80,70,85,Ready
+AI Engineer,60,30,40,10,20,35,Machine Learning Fundamentals
+Web Developer,80,60,10,0,50,85,React.js
+Web Developer,90,80,0,0,40,95,Ready
+Web Developer,50,40,0,0,20,40,Frontend Frameworks
+Cloud Engineer,70,60,20,0,90,88,AWS Solutions Architect
+Cloud Engineer,40,30,10,0,40,30,Cloud Foundations
+Cyber Security,60,40,10,0,60,70,Network Security
+Cyber Security,80,70,20,0,80,85,Ready
+Software Developer,80,70,30,0,40,80,System Design
+Software Developer,60,50,20,0,20,50,Data Structures & Algorithms
+Software Developer,90,85,40,10,60,90,Ready

@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="margin-bottom: 3rem;">
+    <h1 class="text-gradient">Performance & History</h1>
+    <p style="color: var(--text-muted);">Track your progress, past quiz scores, and career readiness trends.</p>
+</div>
+
+{% if quiz_history %}
+<div class="glass-card" style="margin-bottom: 2rem;">
+    <h3 style="margin-bottom: 1rem;"><i class="fa-solid fa-clock-rotate-left" style="color: var(--primary);"></i> Quiz History</h3>
+    <table style="width: 100%; border-collapse: collapse; text-align: left;">
+        <thead>
+            <tr style="border-bottom: 1px solid var(--border-light); color: var(--text-muted);">
+                <th style="padding: 1rem 0;">Date</th>
+                <th style="padding: 1rem 0;">Assessment</th>
+                <th style="padding: 1rem 0;">Score</th>
+                <th style="padding: 1rem 0;">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in quiz_history | reverse %}
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                <td style="padding: 1rem 0;">{{ entry.date }}</td>
+                <td style="padding: 1rem 0;">{{ entry.quiz }}</td>
+                <td style="padding: 1rem 0; font-weight: 600; color: {% if entry.score >= 80 %}var(--accent){% elif entry.score >= 50 %}var(--primary){% else %}#ef4444{% endif %};">{{ entry.score }}%</td>
+                <td style="padding: 1rem 0;">
+                    <span style="background: {% if entry.status == 'Mastered' %}rgba(6,182,212,0.2){% elif entry.status == 'Improved' %}rgba(99,102,241,0.2){% else %}rgba(239,68,68,0.2){% endif %}; color: {% if entry.status == 'Mastered' %}var(--accent){% elif entry.status == 'Improved' %}var(--primary){% else %}#ef4444{% endif %}; padding: 0.2rem 0.75rem; border-radius: 20px; font-size: 0.85rem;">{{ entry.status }}</span>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+{% if past_analyses %}
+<div class="glass-card" style="margin-bottom: 2rem;">
+    <h3 style="margin-bottom: 1rem;"><i class="fa-solid fa-history" style="color: var(--accent);"></i> Analysis History (Last 10 Attempts)</h3>
+    <table style="width: 100%; border-collapse: collapse; text-align: left;">
+        <thead>
+            <tr style="border-bottom: 1px solid var(--border-light); color: var(--text-muted);">
+                <th style="padding: 1rem 0;">Timestamp</th>
+                <th style="padding: 1rem 0;">Target Role</th>
+                <th style="padding: 1rem 0;">Readiness Score</th>
+                <th style="padding: 1rem 0;">Detected Skills</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in past_analyses %}
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                <td style="padding: 1rem 0; color: var(--text-muted); font-size: 0.9rem;">{{ entry.date }}</td>
+                <td style="padding: 1rem 0; font-weight: 600; color: var(--text-main);">{{ entry.role }}</td>
+                <td style="padding: 1rem 0; font-weight: 700; color: var(--accent);">{{ entry.score }}%</td>
+                <td style="padding: 1rem 0;">
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+                        {% for skill in entry.skills[:3] %}
+                        <span style="font-size: 0.75rem; color: var(--text-muted); background: rgba(255,255,255,0.05); padding: 0.1rem 0.5rem; border-radius: 4px;">{{ skill }}</span>
+                        {% endfor %}
+                        {% if entry.skills|length > 3 %}
+                        <span style="font-size: 0.75rem; color: var(--primary);">+{{ entry.skills|length - 3 }} more</span>
+                        {% endif %}
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+{% if not quiz_history and not past_analyses %}
+<div class="glass-card" style="text-align: center; padding: 4rem;">
+    <i class="fa-solid fa-folder-open" style="font-size: 3rem; color: var(--text-muted); opacity: 0.4; margin-bottom: 1rem;"></i>
+    <p style="color: var(--text-muted); margin-bottom: 1rem;">No history yet. Take a quiz or run a skill analysis to start tracking your progress.</p>
+    <div style="display: flex; gap: 1rem; justify-content: center;">
+        <a href="{{ url_for('quiz') }}" class="action-btn" style="text-decoration: none; padding: 0.7rem 1.5rem; background: var(--primary); color: white; border-radius: 10px;">Take a Quiz</a>
+        <a href="{{ url_for('analysis') }}" class="action-btn" style="text-decoration: none; padding: 0.7rem 1.5rem; background: var(--accent); color: white; border-radius: 10px;">Run Analysis</a>
+    </div>
+</div>
+{% endif %}
+
+{% if analysis %}
+<div class="glass-card">
+    <h3 style="margin-bottom: 1rem;"><i class="fa-solid fa-magnifying-glass-chart" style="color: var(--secondary);"></i>
+        Last Skill Analysis</h3>
+    <div
+        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+        <div style="background: rgba(255,255,255,0.05); padding: 1.25rem; border-radius: 12px; text-align: center;">
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.5rem;">Target Role</p>
+            <h3 style="color: var(--text-main);">{{ analysis.target_role }}</h3>
+        </div>
+        <div style="background: rgba(255,255,255,0.05); padding: 1.25rem; border-radius: 12px; text-align: center;">
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.5rem;">Match Score</p>
+            <h3 style="color: var(--accent);">{{ analysis.match_score }}%</h3>
+        </div>
+        <div style="background: rgba(255,255,255,0.05); padding: 1.25rem; border-radius: 12px; text-align: center;">
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.5rem;">AI Recommendation</p>
+            <h3 style="color: var(--secondary);">{{ analysis.recommendation }}</h3>
+        </div>
+    </div>
+
+    <div style="margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05); pt: 1.5rem;">
+        <h4 style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Skill Breakdown:</h4>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+            {% for skill, score in analysis.user_skills_data.items() %}
+            <div
+                style="background: rgba(255,255,255,0.02); padding: 0.75rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.03); display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 0.85rem; color: var(--text-muted);">{{ skill }}</span>
+                <span
+                    style="font-size: 0.9rem; font-weight: 600; color: {{ 'var(--accent)' if score >= 80 else 'var(--primary)' if score >= 50 else '#ef4444' }};">{{
+                    score }}%</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
